@@ -1,0 +1,56 @@
+
+@use 'variables' as *;
+// ========== DIALOG CONTAINER STYLES ========== //
+::ng-deep .mat-mdc-dialog-container {
+
+  --mdc-dialog-container-shape: #{map-get($dialog, borderRadius)}; 
+  border-radius: var(--mdc-dialog-container-shape);
+  
+  .mdc-dialog__surface {
+    border-radius: var(--mdc-dialog-container-shape); 
+  }
+
+
+
+  .mdc-dialog .mdc-dialog__content {
+    padding: 0;
+  }
+  .mdc-dialog__actions {
+    padding: 0;
+  }
+}
+
+// ========== DIALOG LAYOUT STYLES ========== //
+.dialog {
+  padding: map-get($dialog, padding);
+}
+
+.full-width {
+  width: 100%;
+}
+
+// ========== DIALOG TITLE STYLES ========== //
+h2.title-dialog {
+  color: map-get($dialog, titleColor);
+  font-family: map-get($dialog, titleFont);
+  font-size: map-get($dialog, titleSize);
+  font-weight: 500;
+  line-height: map-get($dialog, titleLineHeight);
+  letter-spacing: map-get($dialog, titleSpacing);
+  text-align: left;
+  margin-bottom: map-get($dialog, titleMarginBottom);
+}
+
+// ========== DIALOG FORM ELEMENTS ========== //
+app-input {
+  margin-bottom: map-get($dialog, inputMarginBottom);
+}
+
+// ========== DIALOG ACTIONS STYLES ========== //
+.dialog-actions {
+  display: flex;
+  padding: 0;
+  justify-content: flex-end;
+  gap: map-get($dialog, actionsGap);
+  margin-top: map-get($dialog, actionsMarginTop);
+}

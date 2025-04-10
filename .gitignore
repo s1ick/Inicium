@@ -1,0 +1,41 @@
+### Angular ###
+/.angular/cache
+/dist
+/tmp
+/out-tsc
+
+### Node ###
+/node_modules
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+### IDE ###
+# JetBrains
+.idea/
+*.iml
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+### Testing ###
+/coverage
+testem.log
+
+### Misc ###
+*.log
+.sass-cache/
+.env
+.env.local

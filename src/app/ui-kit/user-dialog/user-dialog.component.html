@@ -1,0 +1,53 @@
+<div class="dialog">
+  <h2 class="title-dialog">{{ title }}</h2>
+
+  <div *ngIf="mode === 'delete'" mat-dialog-content>
+    {{ content }}
+  </div>
+
+  <form *ngIf="mode === 'add' || mode === 'edit'" [formGroup]="userForm" mat-dialog-content>
+    <app-input
+      formControlName="name"
+      label="Имя"
+      [required]="true"
+      [minLength]="2"
+      validationType="text">
+    </app-input>
+
+    <app-input
+      formControlName="surname"
+      label="Фамилия"
+      [required]="true"
+      [minLength]="2"
+      validationType="text">
+    </app-input>
+
+    <app-input
+      formControlName="email"
+      label="Email"
+      type="email"
+      [required]="true"
+      validationType="email">
+    </app-input>
+
+    <app-input
+      formControlName="phone"
+      label="Телефон"
+      placeholder="+79991234567"
+      validationType="phone">
+    </app-input>
+  </form>
+
+  <div mat-dialog-actions class="dialog-actions">
+    <app-button type="secondary" (click)="onCancel()">
+      {{ cancelText }}
+    </app-button>
+    
+    <app-button 
+      type="primary" 
+      (click)="onConfirm()"
+      [disabled]="confirmDisabled">
+      {{ confirmText }}
+    </app-button>
+  </div>
+</div>

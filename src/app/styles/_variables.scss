@@ -1,0 +1,136 @@
+
+// ========== COLORS ========== //
+$color-white: #fff;
+$color-primary: rgb(47, 127, 213);
+$color-gray-light: rgb(187, 197, 201);
+$color-gray-medium: #ababac;
+$color-gray-dark: #505662;
+$color-text-dark: rgb(26, 33, 36);
+$color-error: #DA1B1B;
+$color-bg-page: #e9f3ff;
+$color-row-selected: #e9f0ff;
+$color-border-light: rgb(187, 197, 201);
+
+// ========== SPACING ========== //
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 21px;
+
+// ========== BORDERS ========== //
+$border-radius-sm: 4px;
+
+// ========== Z-INDEX ========== //
+$z-index-sticky: 100;
+
+// ========== TYPOGRAPHY ========== //
+$font-family-primary: "Roboto", sans-serif;
+
+// ========== DIALOG VARIABLES ========== //
+$dialog: (
+  borderRadius: 20px,
+  padding: 44px 40px 40px,
+  titleColor: rgb(35, 31, 32),
+  titleFont: (
+    "Roboto",
+    sans-serif,
+  ),
+  titleSize: 24px,
+  titleLineHeight: 24px,
+  titleSpacing: 0.1px,
+  titleMarginBottom: 40px,
+  inputMarginBottom: 20px,
+  actionsMarginTop: 28px,
+  actionsGap: 10px,
+);
+
+// ========== INPUT VARIABLES ========== //
+$input-autofill: (
+  bg-color: white,
+  text-color: #333,
+  shadow-size: 30px,
+  transition-duration: 5000s,
+);
+
+// ========== CHECKBOX VARIABLES ========== //
+$checkbox: (
+  size: 18px,
+  border-width: 2px,
+  border-radius: 4px,
+  border-color: rgb(218, 218, 218),
+  checked-bg: rgb(74, 149, 247),
+  checked-border: rgb(74, 149, 247),
+  icon-size: 14px,
+  label-font: (
+    "Roboto",
+    sans-serif,
+  ),
+  label-font-size: 14px,
+  label-color: rgba(0, 0, 0, 0.87),
+  disabled-opacity: 0.6,
+  spacing: 8px,
+);
+
+// ========== BUTTON VARIABLES ========== //
+$button-primary: (
+  bg: rgb(47, 103, 213),
+  hover: rgb(60, 124, 248),
+  active: rgb(25, 78, 182),
+  disabled: rgb(216, 222, 233),
+  text: #fff,
+);
+$button-secondary: (
+  bg: #fff,
+  hover: rgba(60, 124, 248, 0.1),
+  active: rgba(25, 78, 182, 0.2),
+  disabled-text: rgba(0, 0, 0, 0.38),
+  disabled-border: rgba(0, 0, 0, 0.12),
+  text: rgb(47, 103, 213)
+);
+
+$button-fab: (
+  size: 36px,
+  icon-default:#A8B0BF,
+  icon-disabled: #A8B0BF,
+  hover-bg: rgb(226, 238, 255),
+  active-bg: rgb(181, 211, 255),
+);
+
+$button-sizes: (
+  default: (
+    min-width: 115px,
+    height: 53px,
+    padding: 16px 22px,
+    radius: 37px,
+    font-size: 16px
+  ),
+  fab: (
+    size: 36px,
+    icon-size: 20px
+  )
+);
+
+// ========== MATERIAL THEME OVERRIDES ========== //
+:root {
+    // Text field colors
+    --mdc-filled-text-field-container-color: $color-white;
+    --mdc-filled-text-field-focus-active-indicator-color: $color-primary;
+    --mdc-filled-text-field-active-indicator-color: $color-gray-dark;
+    --mdc-filled-text-field-caret-color: $color-text-dark;
+    
+    // Text and placeholder
+    --mdc-filled-text-field-input-text-color: $color-text-dark;
+    --mdc-filled-text-field-label-text-color: $color-gray-light;
+    --mdc-filled-text-field-focus-label-text-color: $color-primary;
+    
+    // Error states
+    --mdc-filled-text-field-error-focus-active-indicator-color: $color-error;
+    --mdc-filled-text-field-error-active-indicator-color: $color-error;
+    --mdc-filled-text-field-error-label-text-color: $color-error;
+    
+    // Sizes
+    --input-height: 56px;
+    --input-padding: $spacing-sm 0 $spacing-sm $spacing-md;
+    --input-border-radius: $border-radius-sm $border-radius-sm 0 0;
+  }
+  

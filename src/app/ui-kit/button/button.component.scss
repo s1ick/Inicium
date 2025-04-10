@@ -1,0 +1,169 @@
+
+@use 'variables' as *;
+// ========== BASE BUTTON STYLES ========== //
+.custom-button {
+  // Size properties
+  min-width: map-get(map-get($button-sizes, default), min-width);
+  height: map-get(map-get($button-sizes, default), height);
+  padding: map-get(map-get($button-sizes, default), padding);
+  border-radius: map-get(map-get($button-sizes, default), radius);
+  
+  // Typography
+  font-family: inherit;
+  font-weight: 400;
+  font-size: map-get(map-get($button-sizes, default), font-size);
+  line-height: 1;
+  
+  // Layout
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  
+  // Interaction
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: all 0.3s ease;
+  
+  // Material button adjustments
+  &.mat-button {
+    line-height: 1;
+    padding: map-get(map-get($button-sizes, default), padding);
+    
+    .mat-button-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+
+  // Primary button variant
+  &.primary {
+    background: map-get($button-primary, bg);
+    color: map-get($button-primary, text);
+
+    &:hover:not([disabled]) {
+      background: map-get($button-primary, hover);
+    }
+
+    &:active:not([disabled]) {
+      background: map-get($button-primary, active);
+    }
+
+    &[disabled] {
+      background: map-get($button-primary, disabled);
+      color: map-get($button-primary, text);
+      cursor: not-allowed;
+    }
+  }
+
+  // Secondary button variant
+  &.secondary {
+    background: map-get($button-secondary, bg);
+    color: map-get($button-secondary, text);
+
+    &:hover:not([disabled]) {
+      background: map-get($button-secondary, hover);
+    }
+
+    &:active:not([disabled]) {
+      background: map-get($button-secondary, active);
+    }
+
+    &[disabled] {
+      background: map-get($button-secondary, bg);
+      color: map-get($button-secondary, disabled-text);
+      border-color: map-get($button-secondary, disabled-border);
+      cursor: not-allowed;
+    }
+  }
+}
+
+// ========== FAB BUTTON STYLES ========== //
+.custom-fab-button {
+  // Size properties
+  $fab-size: map-get(map-get($button-sizes, fab), size);
+  width: $fab-size;
+  height: $fab-size;
+  min-width: 0;
+  border-radius: 50%;
+  
+  // Layout
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  
+  // Appearance
+  background: none;
+  border: none;
+  
+  // Interaction
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  
+  // Icon container
+  .icon-container {
+    $icon-size: map-get(map-get($button-sizes, fab), icon-size);
+    width: $icon-size;
+    height: $icon-size;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    
+    svg {
+      width: 100%;
+      height: 100%;
+      path {
+        transition: fill 0.3s ease;
+        fill: map-get($button-fab, icon-default);
+      }
+    }
+  }
+
+  // Background circle
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: transparent;
+    transition: background-color 0.3s ease;
+    z-index: 0;
+  }
+
+  // States
+  &:not([disabled]) {
+    .icon-container svg path {
+      fill: map-get($button-fab, icon-default);
+    }
+  }
+
+  &:hover:not([disabled])::after {
+    background: map-get($button-fab, hover-bg);
+  }
+
+  &:active:not([disabled])::after {
+    background: map-get($button-fab, active-bg);
+    
+    .icon-container svg path {
+      fill: map-get($button-fab, icon-default);
+    }
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+    
+    .icon-container svg path {
+      fill: map-get($button-fab, icon-disabled);
+    }
+    
+    &::after {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,79 @@
+<div class="layout">
+  <h1>Клиенты</h1>
+  <div *ngIf="isLoading" class="spinner-container" class="pulse-loader">
+    <div class="dot" *ngFor="let i of [1,2,3]"></div>
+  </div>
+  <div class="table-wrapper">
+    <div class="controls">
+      <!-- Кнопка добавления -->
+      <app-button
+        (clicked)="openAddDialog()"
+        type="fab"
+        icon="add"
+        class="primary"
+      ></app-button>
+      <!-- Кнопка удаления -->
+      <app-button
+        [disabled]="!hasSelected()"
+        (clicked)="deleteSelected()"
+        type="fab"
+        icon="delete"
+        [disabled]="true"
+      ></app-button>
+      <!-- Для кнопки добавления -->
+      <app-button
+        (clicked)="loadUsers()"
+        type="fab"
+        icon="refresh"
+      ></app-button>
+    </div>
+    <ng-scrollbar *ngIf="!isLoading" class="scrollbar">
+      <mat-table [dataSource]="dataSource" matSort>
+        <!-- Колонка с чекбоксами -->
+        <ng-container matColumnDef="select">
+          <mat-header-cell *matHeaderCellDef>
+            <app-checkbox
+              [checked]="isAllSelected()"
+              [indeterminate]="hasSelected() && !isAllSelected()"
+              (checkedChange)="toggleAllSelection($event)"
+            >
+            </app-checkbox>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let user">
+            <app-checkbox
+              [checked]="selection.isSelected(user)"
+              (checkedChange)="selectRow(user)"
+              (click)="$event.stopPropagation()"
+            >
+            </app-checkbox>
+          </mat-cell>
+        </ng-container>
+        <!-- Динамические колонки -->
+        <ng-container
+          *ngFor="let column of displayedColumns.slice(1)"
+          [matColumnDef]="column"
+        >
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{ getColumnName(column) }}
+          </mat-header-cell>
+          <mat-cell *matCellDef="let user">
+            <span *ngIf="column !== 'name'">{{ user[column] }}</span>
+            <a
+              *ngIf="column === 'name'"
+              (click)="openEditDialog(user)"
+              class="name-link"
+            >
+              {{ user[column] }}
+            </a>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row
+          *matRowDef="let row; columns: displayedColumns"
+          [class.row-selected]="row.selected"
+        ></mat-row>
+      </mat-table>
+    </ng-scrollbar>
+  </div>
+</div>

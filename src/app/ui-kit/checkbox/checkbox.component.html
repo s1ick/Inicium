@@ -1,0 +1,40 @@
+<label
+  [class]="wrapperClass()"
+  [attr.aria-label]="label() || 'Чекбокс'"
+  [attr.aria-checked]="indeterminate() ? 'mixed' : checked()"
+  [attr.aria-disabled]="disabled()"
+  (keydown)="onKeydown($event)"
+>
+  <input
+    type="checkbox"
+    class="visually-hidden"
+    [checked]="checked()"
+    [attr.indeterminate]="indeterminate()"
+    [disabled]="disabled()"
+    (change)="toggle($event)"
+    tabindex="-1"
+  >
+
+  <span
+    [class]="checkboxClass()"
+    role="checkbox"
+    [attr.aria-label]="label() || 'Чекбокс'"
+    tabindex="0"
+  >
+    @if (checked() && !indeterminate()) {
+      <svg class="check-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+      </svg>
+    }
+
+    @if (indeterminate()) {
+      <svg class="minus-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="currentColor" d="M19 13H5v-2h14v2z"/>
+      </svg>
+    }
+  </span>
+
+  @if (label()) {
+    <span class="checkbox-label">{{ label() }}</span>
+  }
+</label>

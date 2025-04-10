@@ -1,0 +1,209 @@
+@use '../../../styles/variables' as *;
+
+// ========== BASE BUTTON STYLES ========== //
+.custom-button {
+  // Size properties - используем CSS переменные напрямую
+  min-width: var(--button-default-min-width, 115px);
+  height: var(--button-default-height, 53px);
+  padding: var(--button-default-padding, 16px 22px);
+  border-radius: var(--button-default-radius, 37px);
+
+  // Typography
+  font-family: inherit;
+  font-weight: 400;
+  font-size: var(--button-default-font-size, 16px);
+  line-height: 1;
+
+  // Layout
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  // Interaction
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: all 0.3s ease;
+
+  // Material button adjustments
+  &.mat-button {
+    line-height: 1;
+    padding: var(--button-default-padding, 16px 22px);
+
+    .mat-button-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+
+  // Primary button variant
+  &.primary {
+    background: var(--button-primary-bg, #2f67d5);
+    color: var(--button-primary-text, #fff);
+
+    &:hover:not([disabled]) {
+      background: var(--button-primary-hover, #3c7cf8);
+    }
+
+    &:active:not([disabled]) {
+      background: var(--button-primary-active, #194eb6);
+    }
+
+    &[disabled] {
+      background: var(--button-primary-disabled, #d8dee9);
+      color: var(--button-primary-text, #fff);
+      cursor: not-allowed;
+    }
+  }
+
+  // Secondary button variant
+  &.secondary {
+    background: var(--button-secondary-bg, #fff);
+    color: var(--button-secondary-text, #2f67d5);
+    border: 1px solid var(--button-secondary-text, #2f67d5);
+
+    &:hover:not([disabled]) {
+      background: var(--button-secondary-hover, rgba(60, 124, 248, 0.1));
+    }
+
+    &:active:not([disabled]) {
+      background: var(--button-secondary-active, rgba(25, 78, 182, 0.2));
+    }
+
+    &[disabled] {
+      background: var(--button-secondary-bg, #fff);
+      color: var(--button-secondary-disabled-text, rgba(0, 0, 0, 0.38));
+      border-color: var(--button-secondary-disabled-border, rgba(0, 0, 0, 0.12));
+      cursor: not-allowed;
+    }
+  }
+}
+
+// ========== FAB BUTTON STYLES ========== //
+.custom-fab-button {
+  // Size properties
+  width: var(--button-fab-size, 36px);
+  height: var(--button-fab-size, 36px);
+  min-width: 0;
+  border-radius: 50%;
+
+  // Layout
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  // Appearance
+  background: none;
+  border: none;
+
+  // Interaction
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+
+  // Icon container
+  .icon-container {
+    width: var(--button-fab-icon-size, 20px);
+    height: var(--button-fab-icon-size, 20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+
+    svg {
+      width: 100%;
+      height: 100%;
+      path {
+        transition: fill 0.3s ease;
+        fill: var(--button-fab-icon-default, #a8b0bf);
+      }
+    }
+  }
+
+  // Background circle
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: transparent;
+    transition: background-color 0.3s ease;
+    z-index: 0;
+  }
+
+  // States
+  &:not([disabled]) {
+    .icon-container svg path {
+      fill: var(--button-fab-icon-default, #a8b0bf);
+    }
+  }
+
+  &:hover:not([disabled])::after {
+    background: var(--button-fab-hover-bg, #e2eeff);
+  }
+
+  &:active:not([disabled])::after {
+    background: var(--button-fab-active-bg, #b5d3ff);
+
+    .icon-container svg path {
+      fill: var(--button-fab-icon-default, #a8b0bf);
+    }
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+
+    .icon-container svg path {
+      fill: var(--button-fab-icon-disabled, #a8b0bf);
+    }
+
+    &::after {
+      display: none;
+    }
+  }
+}
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    color: currentColor;
+  }
+}
+
+// Loading spinner
+.spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// Specific icon styles
+.icon-add {
+  // Additional styles for add icon if needed
+}
+
+.icon-delete {
+  // Additional styles for delete icon if needed
+}
+
+.icon-refresh {
+  // Additional styles for refresh icon if needed
+}

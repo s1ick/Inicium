@@ -1,0 +1,24 @@
+<mat-form-field
+  appearance="fill"
+  class="custom-input"
+  [class.ng-invalid]="hasError()"
+  [class.ng-valid]="!hasError() && control.touched"
+  [class.ng-dirty]="control.dirty"
+>
+  <mat-label>{{ label() }}</mat-label>
+
+  <input
+    matInput
+    [type]="type()"
+    [placeholder]="placeholder()"
+    [formControl]="control"
+    [required]="isRequired()"
+    (input)="onInput($event)"
+    (blur)="onBlur()"
+    (focus)="onFocus()"
+  >
+
+  @if (hasError()) {
+    <mat-error>{{ errorMessage() }}</mat-error>
+  }
+</mat-form-field>

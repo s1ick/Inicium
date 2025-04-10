@@ -1,0 +1,360 @@
+@use "../styles/variables" as *;
+
+// ===== MODERN CSS VARIABLES =====
+:host {
+  // CSS Custom Properties for theming
+  --table-header-color: #2f4c97;
+  --table-hover-bg: #e9f0ff;
+  --table-selected-bg: #e9f0ff;
+  --controls-bg: #f5f5f5;
+  --border-radius: 20px;
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+}
+
+// ===== LAYOUT =====
+.layout {
+  padding: 0 var(--spacing-xs) 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+// ===== TYPOGRAPHY =====
+h1 {
+  color: $color-primary;
+  font-family: $font-family-primary;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 81px;
+  min-height: 81px;
+  letter-spacing: 0.15px;
+  margin: 0 0 10px;
+  padding: 0 var(--spacing-sm);
+}
+
+// ===== CONTROLS =====
+.controls {
+  display: flex;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
+  align-items: center;
+  background: var(--controls-bg);
+  border-radius: 4px;
+  margin-bottom: var(--spacing-md);
+
+  // Selected counter - will be visible only when needed
+  .selected-counter {
+    margin-left: auto;
+    font-size: 14px;
+    color: var(--table-header-color);
+    font-weight: 500;
+  }
+}
+
+// ===== TABLE CONTAINER =====
+.table-wrapper {
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  border: none;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.table-container {
+  position: relative;
+  min-height: 200px;
+  flex: 1;
+  overflow: auto;
+
+  // Modern scrollbar styling
+  scrollbar-width: thin;
+  scrollbar-color: #c1c1c1 transparent;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+
+    &:hover {
+      background: #a1a1a1;
+    }
+  }
+}
+
+// ===== TABLE STYLES =====
+mat-table {
+  width: max-content;
+  min-width: 100%;
+
+  // Header styles
+  mat-header-cell {
+    font-weight: 500;
+    color: var(--table-header-color);
+    font-size: 12px;
+    letter-spacing: 0.25px;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 10;
+    border-bottom: 2px solid rgba(171, 171, 172, 0.16);
+
+    .mat-sort-header-arrow {
+      color: var(--table-header-color) !important;
+      opacity: 1 !important;
+    }
+  }
+
+  // Cell styles
+  mat-cell {
+    color: rgb(38, 50, 56);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0.25px;
+    border-bottom: 1px solid rgba(171, 171, 172, 0.16);
+
+    // First column (checkbox) specific styles
+    &:first-of-type {
+      padding-left: 23px;
+      padding-right: 0;
+      max-width: 45px;
+    }
+  }
+
+  // Column specific widths
+  .mat-column-phone {
+    max-width: 160px;
+    text-align: right;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .mat-column-email {
+    max-width: 300px;
+    text-align: right;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  // Row interactions
+  mat-row {
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: var(--table-hover-bg);
+    }
+
+    // Selected row state
+    &.row-selected {
+      background-color: var(--table-selected-bg) !important;
+    }
+  }
+}
+
+// ===== LOADING STATES =====
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+
+  &.pulse-loader {
+    gap: var(--spacing-xs);
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #3F51B5;
+      animation: pulse 1.4s ease-in-out infinite both;
+
+      // Stagger animation for dots
+      @for $i from 1 through 3 {
+        &:nth-child(#{$i}) {
+          animation-delay: #{$i * 0.16}s;
+        }
+      }
+    }
+  }
+}
+
+@keyframes pulse {
+  0%, 60%, 100% {
+    transform: scale(0.6);
+    opacity: 0.5;
+  }
+  30% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+// ===== ERROR STATE =====
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-lg);
+  gap: var(--spacing-md);
+  text-align: center;
+  color: #d32f2f;
+
+  mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+  }
+}
+
+// ===== EMPTY STATE =====
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  gap: var(--spacing-md);
+  text-align: center;
+  color: #666;
+
+  mat-icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    opacity: 0.5;
+  }
+}
+
+// ===== NAME LINK =====
+.name-link {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font: inherit;
+  padding: 0;
+
+  &:hover {
+    text-decoration: underline;
+    color: #3c7cf8;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #3c7cf8;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+// ===== DIALOG OVERRIDES =====
+:host ::ng-deep {
+  mat-dialog-container.mdc-dialog {
+    .mdc-dialog__title {
+      padding: 0;
+    }
+
+    .mdc-dialog__content {
+      padding: 0;
+      overflow: visible;
+    }
+
+    .cdk-overlay-dark-backdrop {
+      background: rgba(38, 50, 56, 0.32);
+    }
+  }
+
+  // Ensure table header stays on top during scroll
+  mat-table .mat-header-row {
+    position: sticky !important;
+    top: 0;
+    background: white;
+    z-index: 100;
+  }
+}
+
+// ===== RESPONSIVE DESIGN =====
+@media (max-width: 768px) {
+  .layout {
+    padding: 0 4px;
+  }
+
+  h1 {
+    font-size: 24px;
+    line-height: 60px;
+    min-height: 60px;
+    padding: 0 8px;
+  }
+
+  .controls {
+    padding: var(--spacing-sm);
+    gap: 8px;
+
+    .selected-counter {
+      font-size: 12px;
+    }
+  }
+
+  .table-container {
+    font-size: 13px;
+  }
+
+  mat-table {
+    mat-cell {
+      font-size: 13px;
+
+      &:first-of-type {
+        padding-left: 12px;
+        max-width: 40px;
+      }
+    }
+
+    .mat-column-phone,
+    .mat-column-email {
+      max-width: 120px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 20px;
+    line-height: 48px;
+    min-height: 48px;
+  }
+
+  .controls {
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .selected-counter {
+      margin-left: 0;
+      flex-basis: 100%;
+      text-align: center;
+      order: -1;
+    }
+  }
+
+  mat-table {
+    .mat-column-phone,
+    .mat-column-email {
+      display: none;
+    }
+  }
+}

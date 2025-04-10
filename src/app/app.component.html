@@ -1,0 +1,153 @@
+<div class="layout">
+  <h1>Клиенты</h1>
+
+  <!-- Loading State -->
+  @if (isLoading()) {
+    <div class="spinner-container pulse-loader">
+      @for (i of [1,2,3]; track i) {
+        <div class="dot"></div>
+      }
+    </div>
+  }
+
+  <!-- Error State -->
+  @if (error()) {
+    <div class="error-state">
+      <mat-icon>error_outline</mat-icon>
+      <span>{{ error() }}</span>
+      <app-button
+        (clicked)="loadUsers()"
+        type="secondary"
+        icon="refresh"
+      >
+        Повторить
+      </app-button>
+    </div>
+  }
+
+  <!-- Main Content -->
+  @if (!isLoading() && !error()) {
+    <div class="table-wrapper">
+      <!-- Controls -->
+      <div class="controls">
+        <!-- Add Button -->
+        <app-button
+          (clicked)="openAddDialog()"
+          type="fab"
+          icon="add"
+          class="primary"
+          [attr.aria-label]="'Добавить пользователя'"
+        ></app-button>
+
+        <!-- Delete Button -->
+        <app-button
+          [disabled]="!hasSelected()"
+          (clicked)="deleteSelected()"
+          type="fab"
+          icon="delete"
+          [attr.aria-label]="'Удалить выбранных пользователей'"
+        ></app-button>
+
+        <!-- Refresh Button -->
+        <app-button
+          (clicked)="loadUsers()"
+          type="fab"
+          icon="refresh"
+          [attr.aria-label]="'Обновить список'"
+        ></app-button>
+
+        <!-- Selected Counter -->
+        @if (hasSelected()) {
+          <span class="selected-counter">
+            Выбрано: {{ selectedCount() }}
+          </span>
+        }
+      </div>
+
+      <!-- Table Container with Native Scroll -->
+      <div class="table-container">
+        <mat-table [dataSource]="dataSource()" matSort>
+
+          <!-- Checkbox Column -->
+          <ng-container matColumnDef="select">
+            <mat-header-cell *matHeaderCellDef>
+              <app-checkbox
+                [checked]="isAllSelected()"
+                [indeterminate]="hasSelected() && !isAllSelected()"
+                (checkedChange)="toggleAllSelection($event)"
+                [attr.aria-label]="'Выбрать всех пользователей'"
+              ></app-checkbox>
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let user">
+              <app-checkbox
+                [checked]="selection().isSelected(user)"
+                (checkedChange)="selectRow(user)"
+                (click)="$event.stopPropagation()"
+                [attr.aria-label]="'Выбрать пользователя ' + user.name"
+              ></app-checkbox>
+            </mat-cell>
+          </ng-container>
+
+          <!-- Dynamic Data Columns -->
+          @for (column of displayedColumns().slice(1); track column) {
+            <ng-container [matColumnDef]="column">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>
+                {{ getColumnName(column) }}
+              </mat-header-cell>
+
+              <mat-cell *matCellDef="let user">
+                @if (column !== 'name') {
+                  <span>{{ user[column] }}</span>
+                }
+
+                @if (column === 'name') {
+                  <button
+                    (click)="openEditDialog(user)"
+                    class="name-link"
+                    type="button"
+                    [attr.aria-label]="'Редактировать пользователя ' + user.name"
+                  >
+                    {{ user[column] }}
+                  </button>
+                }
+              </mat-cell>
+            </ng-container>
+          }
+
+          <!-- Header Row -->
+          <mat-header-row
+            *matHeaderRowDef="displayedColumns()"
+            class="header-row"
+          ></mat-header-row>
+
+          <!-- Data Rows -->
+          <mat-row
+            *matRowDef="let row; columns: displayedColumns();"
+            [class.row-selected]="selection().isSelected(row)"
+            class="data-row"
+          ></mat-row>
+
+          <!-- Empty State -->
+          <ng-container *matNoDataRow>
+            <tr class="no-data-row">
+              <td [attr.colspan]="displayedColumns().length">
+                <div class="empty-state">
+                  <mat-icon>people_outline</mat-icon>
+                  <span>Нет данных о пользователях</span>
+                  <app-button
+                    (clicked)="openAddDialog()"
+                    type="secondary"
+                    icon="add"
+                  >
+                    Добавить первого пользователя
+                  </app-button>
+                </div>
+              </td>
+            </tr>
+          </ng-container>
+        </mat-table>
+      </div>
+    </div>
+  }
+</div>

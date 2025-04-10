@@ -1,0 +1,46 @@
+@if (isFab()) {
+  <!-- FAB Button -->
+  <button
+    type="button"
+    class="custom-fab-button"
+    [class]="buttonClass()"
+    [disabled]="disabled() || loading()"
+    [attr.aria-label]="computedAriaLabel()"
+    [attr.aria-busy]="loading()"
+    (click)="onClick($event)"
+    (keydown)="onKeydown($event)"
+  >
+    <div class="icon-container">
+      @if (loading()) {
+        <div class="spinner"></div>
+      } @else if (icon()) {
+        <app-button-icon [icon]="icon()!" />
+      }
+    </div>
+  </button>
+} @else {
+  <!-- Regular Button -->
+  <button
+    type="button"
+    [class]="buttonClass()"
+    [disabled]="disabled() || loading()"
+    [attr.aria-label]="computedAriaLabel()"
+    [attr.aria-busy]="loading()"
+    (click)="onClick($event)"
+    (keydown)="onKeydown($event)"
+  >
+    @if (loading()) {
+      <div class="spinner"></div>
+    }
+
+    @if (hasIcon() && !loading()) {
+      <div class="icon-container">
+        <app-button-icon [icon]="icon()!" />
+      </div>
+    }
+
+    <span class="button-content">
+      <ng-content></ng-content>
+    </span>
+  </button>
+}

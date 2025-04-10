@@ -1,0 +1,63 @@
+<div class="dialog">
+  <h2 class="title-dialog">{{ title() }}</h2>
+
+  @if (mode() === 'delete') {
+    <div mat-dialog-content>
+      {{ content() }}
+    </div>
+  }
+
+  @if (showForm()) {
+<form [formGroup]="userForm" mat-dialog-content>
+  <app-input
+    formControlName="name"
+    label="Имя"
+    [required]="true"
+    [minLength]="2"
+    validationType="text"
+    placeholder="Введите имя">
+  </app-input>
+
+  <app-input
+    formControlName="surname"
+    label="Фамилия"
+    [required]="true"
+    [minLength]="2"
+    validationType="text"
+    placeholder="Введите фамилию">
+  </app-input>
+
+  <app-input
+    formControlName="email"
+    label="Email"
+    type="email"
+    [required]="true"
+    validationType="email"
+    placeholder="example@mail.com">
+  </app-input>
+
+  <app-input
+    formControlName="phone"
+    label="Телефон"
+    type="tel"
+    validationType="phone"
+    placeholder="+79991234567">
+  </app-input>
+</form>
+  }
+
+  <div mat-dialog-actions class="dialog-actions">
+    <app-button
+      type="secondary"
+      (clicked)="onCancel()">
+      {{ cancelText() }}
+    </app-button>
+
+    <app-button
+      type="primary"
+      (clicked)="onConfirm()"
+      [disabled]="confirmDisabled()">
+      {{ confirmText() }}
+    </app-button>
+  </div>
+</div>

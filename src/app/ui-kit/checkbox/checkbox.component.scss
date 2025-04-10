@@ -1,0 +1,103 @@
+.checkbox-wrapper {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  gap: 0.5rem;
+
+  &:focus-within {
+    outline: 2px solid var(--color-primary, #2f7fd5);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  &.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.custom-checkbox {
+  // Size and position
+  width: var(--checkbox-size, 1.125rem);
+  height: var(--checkbox-size, 1.125rem);
+  position: relative;
+
+  // Appearance
+  border: var(--checkbox-border-width, 2px) solid var(--checkbox-border-color, #dadada);
+  border-radius: var(--checkbox-border-radius, 4px);
+  background: #fff;
+  box-sizing: border-box;
+
+  // Layout
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  // Interaction
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+
+  // Focus styles
+  &:focus-visible {
+    outline: 2px solid var(--color-primary, #2f7fd5);
+    outline-offset: 2px;
+  }
+
+  // States
+  &.checked {
+    background: var(--checkbox-checked-bg, #4a95f7);
+    border-color: var(--checkbox-checked-border, #4a95f7);
+  }
+
+  &.indeterminate {
+    background: var(--checkbox-checked-bg, #4a95f7);
+    border-color: var(--checkbox-checked-border, #4a95f7);
+  }
+
+  &.disabled {
+    opacity: var(--checkbox-disabled-opacity, 0.6);
+    cursor: not-allowed;
+
+    &:hover {
+      border-color: var(--checkbox-border-color, #dadada);
+    }
+  }
+
+  // Hover state for interactive checkboxes
+  &:not(.disabled):hover {
+    border-color: var(--checkbox-checked-border, #4a95f7);
+  }
+}
+
+// Icons
+.check-icon,
+.minus-icon {
+  width: var(--checkbox-icon-size, 0.875rem);
+  height: var(--checkbox-icon-size, 0.875rem);
+  display: block;
+  color: #fff;
+}
+
+// Label
+.checkbox-label {
+  font-family: var(--font-family-primary, 'Roboto', sans-serif);
+  font-size: var(--checkbox-label-font-size, 0.875rem);
+  color: var(--checkbox-label-color, rgba(0, 0, 0, 0.87));
+  line-height: 1.2;
+}

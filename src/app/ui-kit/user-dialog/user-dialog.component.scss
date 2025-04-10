@@ -1,0 +1,54 @@
+@use '../../../styles/variables' as *;
+
+// ========== DIALOG CONTAINER STYLES ========== //
+::ng-deep .mat-mdc-dialog-container {
+  --mdc-dialog-container-shape: var(--dialog-border-radius, 20px);
+  border-radius: var(--mdc-dialog-container-shape);
+
+  .mdc-dialog__surface {
+    border-radius: var(--mdc-dialog-container-shape);
+  }
+
+  .mdc-dialog .mdc-dialog__content {
+    padding: 0;
+  }
+
+  .mdc-dialog__actions {
+    padding: 0;
+  }
+}
+
+// ========== DIALOG LAYOUT STYLES ========== //
+.dialog {
+  padding: var(--dialog-padding, 44px 40px 40px);
+}
+
+.full-width {
+  width: 100%;
+}
+
+// ========== DIALOG TITLE STYLES ========== //
+h2.title-dialog {
+  color: var(--dialog-title-color, #231f20);
+  font-family: var(--font-family-primary, 'Roboto', sans-serif);
+  font-size: var(--dialog-title-size, 24px);
+  font-weight: 500;
+  line-height: var(--dialog-title-line-height, 24px);
+  letter-spacing: var(--dialog-title-spacing, 0.1px);
+  text-align: left;
+  margin-bottom: var(--dialog-title-margin-bottom, 40px);
+}
+
+// ========== DIALOG FORM ELEMENTS ========== //
+app-input {
+  margin-bottom: var(--dialog-input-margin-bottom, 20px);
+}
+
+// ========== DIALOG ACTIONS STYLES ========== //
+.dialog-actions {
+  display: flex;
+  padding: 0;
+  justify-content: flex-end;
+  gap: var(--dialog-actions-gap, 10px);
+  margin-top: var(--dialog-actions-margin-top, 28px);
+}

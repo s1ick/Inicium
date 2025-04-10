@@ -1,0 +1,77 @@
+// src/app/styles/reset.scss
+// ========================
+// Global CSS reset/normalization
+// Uses project variables for consistent styling
+
+@use 'variables' as *;
+
+/* Box sizing and basic reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Document defaults */
+html {
+  font-family: $font-family-primary;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Body styles */
+body {
+  min-height: 100vh;
+  background: $color-bg-page;
+  color: $color-text-dark; // Используем $color-text-dark вместо $color-text-primary
+}
+
+/* Remove list styles */
+ul, ol {
+  list-style: none;
+}
+
+/* Reset links */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Form elements reset */
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+
+/* Button reset */
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Media elements */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
